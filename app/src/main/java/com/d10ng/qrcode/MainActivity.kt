@@ -29,10 +29,13 @@ class MainActivity : BaseActivity() {
                         .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Column {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         SolidButtonWithText(
                             text = "打开相机进行二维码扫描",
                             onClick = {
+                                result = ""
                                 QRCodeScanManager.instant.startScanActivity(this@MainActivity) {
                                     result = it
                                 }

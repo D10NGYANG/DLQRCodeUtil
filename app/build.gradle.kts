@@ -50,7 +50,7 @@ android {
 dependencies {
 
     // jetpack compose 框架
-    implementation(D10NG.DLBasicJetpackComposeApp("1.1.3-RC01"))
+    implementation(D10NG.DLBasicJetpackComposeApp())
 
     // 单元测试（可选）
     testImplementation(Test.junit("4.13.2"))

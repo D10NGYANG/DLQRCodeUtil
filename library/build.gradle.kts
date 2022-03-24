@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NG"
-version = "0.0.1"
+version = "0.0.2"
 
 android {
     compileSdk = Project.compile_sdk
@@ -49,7 +49,7 @@ dependencies {
     implementation(Kotlin.stdlib(kotlin_ver))
 
     // jetpack compose 框架
-    implementation(D10NG.DLBasicJetpackComposeApp("1.1.3-RC01"))
+    implementation(D10NG.DLBasicJetpackComposeApp())
 
     // 单元测试（可选）
     testImplementation(Test.junit("4.13.2"))
@@ -62,7 +62,7 @@ dependencies {
     api("androidx.camera:camera-view:1.0.0-alpha32")
 
     // Zxing
-    api("com.google.zxing:core:3.4.1")
+    api("com.google.zxing:core:3.3.3")
 }
 
 afterEvaluate {

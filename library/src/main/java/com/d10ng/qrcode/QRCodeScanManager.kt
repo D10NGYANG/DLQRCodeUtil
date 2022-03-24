@@ -2,11 +2,12 @@ package com.d10ng.qrcode
 
 import android.app.Activity
 import com.d10ng.applib.app.goTo
+import com.d10ng.coroutines.launchIO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class QRCodeScanManager {
@@ -16,23 +17,27 @@ class QRCodeScanManager {
     }
 
     /** 扫码结果 */
-    private val scanResultFlow = MutableStateFlow("")
+    private val scanResultFlow = MutableSharedFlow<String>()
     /** 等待扫码结果协程 */
     private var scope: CoroutineScope? = null
+    /** 当前扫描活动 */
+    private var curScanAct: Activity? = null
 
     /**
      * 打开扫码页面
      * @param act Activity
      * @param result Function1<String, Unit>
      */
+    @Synchronized
     fun startScanActivity(act: Activity, result: (String) -> Unit) {
         act.goTo(QRCodeScanActivity::class.java)
         scope?.cancel()
         scope = CoroutineScope(Dispatchers.IO).apply {
             launch {
                 scanResultFlow.collect {
-                    if (it.isNotEmpty()) result.invoke(it)
-                    //println("text $result, $it")
+                    result.invoke(it)
+                    curScanAct?.finish()
+                    this.cancel()
                 }
             }
         }
@@ -40,15 +45,15 @@ class QRCodeScanManager {
 
     /**
      * 扫码结束
+     * @param act Activity
      * @param result String
      */
-    fun scanFinish(result: String = "") {
-        if (result.isNotEmpty()) {
-            scanResultFlow.value = result
-        }
-        scope?.cancel()
+    @Synchronized
+    fun scanFinish(act: Activity, result: String = "") {
+        curScanAct = act
+        launchIO { scanResultFlow.emit(result) }
     }
 
     /** 获取扫码结果 */
-    fun getScanResultFlow() = scanResultFlow.asStateFlow()
+    fun getScanResultFlow() = scanResultFlow.asSharedFlow()
 }

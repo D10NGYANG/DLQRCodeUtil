@@ -74,10 +74,7 @@ class QRCodeScanActivity: BaseActivity() {
                             modifier = Modifier
                                 .fillMaxSize(),
                             analyzer = QRCodeAnalyzer {
-                                QRCodeScanManager.instant.scanFinish(it)
-                                if (it.isNotEmpty()) {
-                                    finish()
-                                }
+                                QRCodeScanManager.instant.scanFinish(this@QRCodeScanActivity, it)
                             }
                         )
                     }
@@ -121,7 +118,6 @@ class QRCodeScanActivity: BaseActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        QRCodeScanManager.instant.scanFinish()
+        QRCodeScanManager.instant.scanFinish(this)
     }
 }
