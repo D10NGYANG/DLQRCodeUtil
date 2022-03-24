@@ -43,5 +43,4 @@ QRCodeScanManager.instant.startScanActivity(activity) { scanResult ->
 ```
 
 ## 预览
-
-[![](image/image1.png)](image/image1.png)
+<img src="https://github.com/D10NGYANG/DLQRCodeUtil/blob/master/image/image1.png" width="200"/>
