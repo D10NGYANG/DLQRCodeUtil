@@ -58,4 +58,7 @@ dependencies {
     androidTestImplementation(AndroidX.Test.espresso_core("3.4.0"))
 
     implementation(project(mapOf("path" to ":library")))
+
+    // 内存泄漏检查
+    debugImplementation(Other.Android.leakcanary())
 }

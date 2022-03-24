@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NG"
-version = "0.0.2"
+version = "0.0.3"
 
 android {
     compileSdk = Project.compile_sdk

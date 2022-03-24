@@ -9,6 +9,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
 
 class QRCodeScanManager {
 
@@ -21,7 +22,7 @@ class QRCodeScanManager {
     /** 等待扫码结果协程 */
     private var scope: CoroutineScope? = null
     /** 当前扫描活动 */
-    private var curScanAct: Activity? = null
+    private var curScanAct: WeakReference<Activity>? = null
 
     /**
      * 打开扫码页面
@@ -36,7 +37,7 @@ class QRCodeScanManager {
             launch {
                 scanResultFlow.collect {
                     result.invoke(it)
-                    curScanAct?.finish()
+                    curScanAct?.get()?.finish()
                     this.cancel()
                 }
             }
@@ -50,7 +51,7 @@ class QRCodeScanManager {
      */
     @Synchronized
     fun scanFinish(act: Activity, result: String = "") {
-        curScanAct = act
+        curScanAct = WeakReference(act)
         launchIO { scanResultFlow.emit(result) }
     }
 

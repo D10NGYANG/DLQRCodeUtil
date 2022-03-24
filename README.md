@@ -24,7 +24,7 @@ dependencies {
     // jetpack compose 框架
     implementation 'com.github.D10NGYANG:DLBasicJetpackComposeApp:+'
     // 二维码扫描
-    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.2'
+    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.3'
 }
 ```
 3 混淆
