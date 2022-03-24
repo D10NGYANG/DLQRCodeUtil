@@ -32,7 +32,7 @@ class QRCodeScanManager {
             launch {
                 scanResultFlow.collect {
                     if (it.isNotEmpty()) result.invoke(it)
-                    println("text $result, $it")
+                    //println("text $result, $it")
                 }
             }
         }

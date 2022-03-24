@@ -58,7 +58,7 @@ class QRCodeAnalyzer(
         val ySize = yBuffer.remaining()
         var position = 0
         if (mYBuffer.size != ySize) {
-            Log.w("BarcodeAnalyzer", "swap buffer since size ${mYBuffer.size} != $ySize")
+            Log.w("QRCodeAnalyzer", "swap buffer since size ${mYBuffer.size} != $ySize")
             mYBuffer = ByteArray(ySize)
         }
         // Add the full y buffer to the array. If rowStride > 1, some padding may be skipped.
