@@ -37,6 +37,7 @@ class MainActivity : BaseActivity() {
                             onClick = {
                                 result = ""
                                 QRCodeScanManager.instant.startScanActivity(this@MainActivity) {
+                                    println(it)
                                     result = it
                                 }
                             }

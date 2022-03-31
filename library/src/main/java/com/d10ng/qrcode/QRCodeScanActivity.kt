@@ -48,7 +48,7 @@ class QRCodeScanActivity: BaseActivity() {
                 }
             )
             LaunchedEffect(Unit) {
-                launcher.launch(Manifest.permission.CAMERA)
+                if (!hasCamPermission) launcher.launch(Manifest.permission.CAMERA)
             }
 
             AppTheme(app = app) {
