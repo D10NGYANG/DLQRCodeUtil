@@ -15,6 +15,8 @@ allprojects {
   repositories {
     ...
     maven { url 'https://jitpack.io' }
+    // 或者我的github镜像仓库
+    maven { url 'https://raw.githubusercontent.com/D10NGYANG/maven-repo/main/repository'}
   }
 }
 ```
@@ -22,9 +24,11 @@ allprojects {
 ```gradle
 dependencies {
     // jetpack compose 框架
-    implementation 'com.github.D10NGYANG:DLBasicJetpackComposeApp:+'
+    implementation 'com.github.D10NGYANG:DLBasicJetpackComposeApp:1.+'
+    // 权限申请
+    implementation "com.google.accompanist:accompanist-permissions:0.28.0"
     // 二维码扫描
-    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.3'
+    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.4'
 }
 ```
 3 混淆

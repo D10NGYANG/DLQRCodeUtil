@@ -6,7 +6,7 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.github.D10NG"
+group = "com.github.D10NGYANG"
 version = "0.0.4"
 
 android {
