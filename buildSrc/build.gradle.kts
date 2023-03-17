@@ -4,10 +4,5 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://jitpack.io")
-}
-
-dependencies {
-    implementation("com.github.D10NGYANG:DependencyManagement:+")
 }
 

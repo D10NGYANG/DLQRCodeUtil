@@ -1,15 +1,16 @@
 plugins {
-    id(Android.Plugin.library)
-    id(Kotlin.Plugin.ID.android)
-    id(Kotlin.Plugin.ID.kapt)
-    id(Kotlin.Plugin.ID.parcelize)
-    id(Maven.Plugin.public)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.kapt")
+    id("org.jetbrains.kotlin.plugin.parcelize")
+    id("maven-publish")
 }
 
 group = "com.github.D10NG"
-version = "0.0.3"
+version = "0.0.4"
 
 android {
+    namespace = "com.d10ng.qrcode"
     compileSdk = Project.compile_sdk
 
     defaultConfig {
@@ -23,43 +24,45 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = compose_ver
+        kotlinCompilerExtensionVersion = compose_compiler_ver
     }
     buildFeatures {
         compose = true
     }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
-
-    implementation(Kotlin.stdlib(kotlin_ver))
-
-    // jetpack compose 框架
-    implementation(D10NG.DLBasicJetpackComposeApp())
+    // Android
+    implementation("androidx.core:core-ktx:1.9.0")
 
     // 单元测试（可选）
-    testImplementation(Test.junit("4.13.2"))
-    androidTestImplementation(AndroidX.Test.junit("1.1.3"))
-    androidTestImplementation(AndroidX.Test.espresso_core("3.4.0"))
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // jetpack compose 框架
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.1")
 
     // CameraX
-    api("androidx.camera:camera-camera2:1.0.2")
-    api("androidx.camera:camera-lifecycle:1.0.2")
-    api("androidx.camera:camera-view:1.0.0-alpha32")
+    api("androidx.camera:camera-camera2:1.2.1")
+    api("androidx.camera:camera-lifecycle:1.2.1")
+    api("androidx.camera:camera-view:1.3.0-alpha04")
 
     // Zxing
     api("com.google.zxing:core:3.3.3")
@@ -69,7 +72,13 @@ afterEvaluate {
     publishing {
         publications {
             create("release", MavenPublication::class) {
+                artifactId = "DLQRCodeUtil"
                 from(components.getByName("release"))
+            }
+        }
+        repositories {
+            maven {
+                url = uri("/Users/d10ng/project/kotlin/maven-repo/repository")
             }
         }
     }

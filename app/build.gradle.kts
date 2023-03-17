@@ -1,11 +1,12 @@
 plugins {
-    id(Android.Plugin.application)
-    id(Kotlin.Plugin.ID.android)
-    id(Kotlin.Plugin.ID.kapt)
-    id(Kotlin.Plugin.ID.parcelize)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.kapt")
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {
+    namespace = "com.d10ng.qrcode"
     compileSdk = Project.compile_sdk
 
     defaultConfig {
@@ -28,14 +29,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = compose_ver
+        kotlinCompilerExtensionVersion = compose_compiler_ver
     }
     buildFeatures {
         compose = true
@@ -49,16 +50,18 @@ android {
 
 dependencies {
 
-    // jetpack compose 框架
-    implementation(D10NG.DLBasicJetpackComposeApp())
+    // Android
+    implementation("androidx.core:core-ktx:1.9.0")
 
     // 单元测试（可选）
-    testImplementation(Test.junit("4.13.2"))
-    androidTestImplementation(AndroidX.Test.junit("1.1.3"))
-    androidTestImplementation(AndroidX.Test.espresso_core("3.4.0"))
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation(project(mapOf("path" to ":library")))
+    // jetpack compose 框架
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.1")
 
+    implementation(project(":library"))
     // 内存泄漏检查
-    debugImplementation(Other.Android.leakcanary())
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
 }
