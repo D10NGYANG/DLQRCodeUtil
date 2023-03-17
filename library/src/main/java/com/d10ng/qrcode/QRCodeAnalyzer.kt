@@ -42,7 +42,7 @@ class QRCodeAnalyzer(
                 val result = reader.decode(bitmap)
                 onQrCodeScanned.invoke(result.text)
             } catch (e: Exception) {
-                e.printStackTrace()
+                //e.printStackTrace()
             }
         } else {
             Log.e("QRCodeAnalyzer", "expect YUV_420_888/YUV_422_888/YUV_444_888, now = ${image.format}")

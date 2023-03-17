@@ -12,9 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.d10ng.basicjetpackcomposeapp.BaseActivity
-import com.d10ng.basicjetpackcomposeapp.compose.AppTheme
-import com.d10ng.basicjetpackcomposeapp.view.SolidButtonWithText
+import com.d10ng.compose.BaseActivity
+import com.d10ng.compose.ui.AppTheme
+import com.d10ng.compose.view.SolidButtonWithText
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

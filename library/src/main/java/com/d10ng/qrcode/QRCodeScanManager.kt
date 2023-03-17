@@ -1,15 +1,13 @@
 package com.d10ng.qrcode
 
 import android.app.Activity
-import com.d10ng.applib.app.goTo
-import com.d10ng.coroutines.launchIO
+import android.content.Intent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import java.lang.ref.WeakReference
 
 class QRCodeScanManager {
 
@@ -21,8 +19,6 @@ class QRCodeScanManager {
     private val scanResultFlow = MutableSharedFlow<String>()
     /** 等待扫码结果协程 */
     private var scope: CoroutineScope? = null
-    /** 当前扫描活动 */
-    private var curScanAct: WeakReference<Activity>? = null
 
     /**
      * 打开扫码页面
@@ -37,7 +33,7 @@ class QRCodeScanManager {
             launch {
                 scanResultFlow.collect {
                     result.invoke(it)
-                    curScanAct?.get()?.finish()
+                    QRCodeScanActivity.instant.get()?.finish()
                     this.cancel()
                 }
             }
@@ -45,14 +41,23 @@ class QRCodeScanManager {
     }
 
     /**
+     * 跳转下一个页面，如果栈中有相同的ACT会只保留最新一个到前台
+     * @receiver Activity
+     * @param clz Class<*>
+     */
+    private fun Activity.goTo(clz: Class<*>) {
+        val intent = Intent(this, clz)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    /**
      * 扫码结束
-     * @param act Activity
      * @param result String
      */
     @Synchronized
-    fun scanFinish(act: Activity, result: String = "") {
-        curScanAct = WeakReference(act)
-        launchIO { scanResultFlow.emit(result) }
+    fun scanFinish(result: String = "") {
+        CoroutineScope(Dispatchers.IO).launch { scanResultFlow.emit(result) }
     }
 
     /** 获取扫码结果 */
