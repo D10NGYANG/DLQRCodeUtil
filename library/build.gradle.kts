@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NGYANG"
-version = "0.0.4"
+version = "0.0.5"
 
 android {
     namespace = "com.d10ng.qrcode"
@@ -15,7 +15,6 @@ android {
 
     defaultConfig {
         minSdk = Project.min_sdk
-        targetSdk = Project.target_sdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -24,15 +23,18 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        jvmToolchain(8)
     }
     composeOptions {
         kotlinCompilerExtensionVersion = compose_compiler_ver
@@ -49,7 +51,7 @@ android {
 
 dependencies {
     // Android
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.10.0")
 
     // 单元测试（可选）
     testImplementation("junit:junit:4.13.2")
@@ -57,15 +59,15 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.1")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.2")
 
     // 权限申请
     implementation("com.google.accompanist:accompanist-permissions:0.28.0")
 
     // CameraX
-    api("androidx.camera:camera-camera2:1.2.1")
-    api("androidx.camera:camera-lifecycle:1.2.1")
-    api("androidx.camera:camera-view:1.3.0-alpha04")
+    api("androidx.camera:camera-camera2:1.2.2")
+    api("androidx.camera:camera-lifecycle:1.2.2")
+    api("androidx.camera:camera-view:1.3.0-alpha06")
 
     // Zxing
     api("com.google.zxing:core:3.3.3")
