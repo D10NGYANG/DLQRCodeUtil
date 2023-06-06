@@ -15,5 +15,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "DLQRCodeUtil"
-include("app")
-include("library")
+include("app", "library")

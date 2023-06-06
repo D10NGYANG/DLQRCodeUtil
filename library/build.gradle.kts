@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NGYANG"
-version = "0.0.5"
+version = "0.0.6"
 
 android {
     namespace = "com.d10ng.qrcode"
@@ -51,7 +51,7 @@ android {
 
 dependencies {
     // Android
-    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("androidx.core:core-ktx:1.10.1")
 
     // 单元测试（可选）
     testImplementation("junit:junit:4.13.2")
@@ -59,19 +59,22 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.2")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.4")
 
     // 权限申请
-    implementation("com.google.accompanist:accompanist-permissions:0.28.0")
+    implementation("com.google.accompanist:accompanist-permissions:$accompanist_ver")
 
     // CameraX
-    api("androidx.camera:camera-camera2:1.2.2")
-    api("androidx.camera:camera-lifecycle:1.2.2")
-    api("androidx.camera:camera-view:1.3.0-alpha06")
+    api("androidx.camera:camera-camera2:1.2.3")
+    api("androidx.camera:camera-lifecycle:1.2.3")
+    api("androidx.camera:camera-view:1.3.0-alpha07")
 
     // Zxing
     api("com.google.zxing:core:3.3.3")
 }
+
+val bds100MavenUsername: String by project
+val bds100MavenPassword: String by project
 
 afterEvaluate {
     publishing {
@@ -84,6 +87,13 @@ afterEvaluate {
         repositories {
             maven {
                 url = uri("/Users/d10ng/project/kotlin/maven-repo/repository")
+            }
+            maven {
+                credentials {
+                    username = bds100MavenUsername
+                    password = bds100MavenPassword
+                }
+                setUrl("https://nexus.bds100.com/repository/maven-releases/")
             }
         }
     }

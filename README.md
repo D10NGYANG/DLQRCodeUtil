@@ -24,11 +24,11 @@ allprojects {
 ```gradle
 dependencies {
     // jetpack compose 框架
-    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:1.+'
+    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:1.3.4'
     // 权限申请
-    implementation "com.google.accompanist:accompanist-permissions:0.28.0"
+    implementation "com.google.accompanist:accompanist-permissions:0.30.1"
     // 二维码扫描
-    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.5'
+    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.6'
 }
 ```
 3 混淆
