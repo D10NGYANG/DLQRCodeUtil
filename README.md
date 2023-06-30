@@ -9,26 +9,25 @@ jetpack compose android QRCode scan
 - [ ] 支持相册二维码扫描
 
 ## 添加依赖
-1 Add it in your root build.gradle at the end of repositories:
+1 添加仓库
 ```gradle
 allprojects {
   repositories {
     ...
-    maven { url 'https://jitpack.io' }
-    // 或者我的github镜像仓库
     maven { url 'https://raw.githubusercontent.com/D10NGYANG/maven-repo/main/repository'}
   }
 }
 ```
-2 Add the dependency
+
+2 添加依赖
 ```gradle
 dependencies {
     // jetpack compose 框架
-    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:1.3.4'
+    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:1.3.5'
     // 权限申请
     implementation "com.google.accompanist:accompanist-permissions:0.30.1"
     // 二维码扫描
-    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.6'
+    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.7'
 }
 ```
 3 混淆

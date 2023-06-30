@@ -57,9 +57,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.4")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.5")
 
     implementation(project(":library"))
     // 内存泄漏检查
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.11")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
 }
