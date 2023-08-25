@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NGYANG"
-version = "0.0.8"
+version = "0.0.9"
 
 android {
     namespace = "com.d10ng.qrcode"
@@ -59,7 +59,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.6")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.7")
 
     // 权限申请
     implementation("com.google.accompanist:accompanist-permissions:$accompanist_ver")
@@ -67,7 +67,7 @@ dependencies {
     // CameraX
     api("androidx.camera:camera-camera2:1.2.3")
     api("androidx.camera:camera-lifecycle:1.2.3")
-    api("androidx.camera:camera-view:1.3.0-beta02")
+    api("androidx.camera:camera-view:1.3.0-rc01")
 
     // Zxing
     api("com.google.zxing:core:3.5.2")
