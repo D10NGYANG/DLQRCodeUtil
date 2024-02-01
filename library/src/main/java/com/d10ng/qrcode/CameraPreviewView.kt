@@ -4,6 +4,8 @@ import android.util.Size
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
+import androidx.camera.core.resolutionselector.ResolutionSelector
+import androidx.camera.core.resolutionselector.ResolutionStrategy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.runtime.Composable
@@ -27,7 +29,19 @@ fun CameraPreviewView(
                 .build()
             preview.setSurfaceProvider(previewView.surfaceProvider)
             val imageAnalysis = ImageAnalysis.Builder()
-                .setTargetResolution(Size(previewView.width, previewView.height))
+                .setResolutionSelector(
+                    ResolutionSelector.Builder()
+                        .setResolutionStrategy(
+                            ResolutionStrategy(
+                                Size(
+                                    previewView.width,
+                                    previewView.height
+                                ), ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
+                            )
+                        )
+                        .build()
+                )
+                //.setTargetResolution(Size(previewView.width, previewView.height))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
             imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), analyzer)

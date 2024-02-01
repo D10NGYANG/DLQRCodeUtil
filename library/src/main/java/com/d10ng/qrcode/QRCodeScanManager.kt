@@ -4,9 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class QRCodeScanManager {
@@ -17,27 +16,20 @@ class QRCodeScanManager {
 
     /** 扫码结果 */
     private val scanResultFlow = MutableSharedFlow<String>()
-    /** 等待扫码结果协程 */
-    private var scope: CoroutineScope? = null
+
+    /** 协程 */
+    private var scope = CoroutineScope(Dispatchers.IO)
 
     /**
      * 打开扫码页面
      * @param act Activity
-     * @param result Function1<String, Unit>
+     * @return String
      */
-    @Synchronized
-    fun startScanActivity(act: Activity, result: (String) -> Unit) {
+    suspend fun startScanActivity(act: Activity): String {
         act.goTo(QRCodeScanActivity::class.java)
-        scope?.cancel()
-        scope = CoroutineScope(Dispatchers.IO).apply {
-            launch {
-                scanResultFlow.collect {
-                    result.invoke(it)
-                    QRCodeScanActivity.instant.get()?.finish()
-                    this.cancel()
-                }
-            }
-        }
+        val res = scanResultFlow.first()
+        QRCodeScanActivity.instant.get()?.finish()
+        return res
     }
 
     /**
@@ -56,10 +48,7 @@ class QRCodeScanManager {
      * @param result String
      */
     @Synchronized
-    fun scanFinish(result: String = "") {
-        CoroutineScope(Dispatchers.IO).launch { scanResultFlow.emit(result) }
+    internal fun scanFinish(result: String = "") {
+        scope.launch { scanResultFlow.emit(result) }
     }
-
-    /** 获取扫码结果 */
-    fun getScanResultFlow() = scanResultFlow.asSharedFlow()
 }

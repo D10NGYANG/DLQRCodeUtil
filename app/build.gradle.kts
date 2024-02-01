@@ -49,7 +49,7 @@ android {
 dependencies {
 
     // Android
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.core:core-ktx:1.12.0")
 
     // 单元测试（可选）
     testImplementation("junit:junit:4.13.2")
@@ -57,9 +57,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.7")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:2.0.15")
 
     implementation(project(":library"))
     // 内存泄漏检查
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.13")
 }

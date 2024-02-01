@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NGYANG"
-version = "0.0.9"
+version = "0.1.0"
 
 android {
     namespace = "com.d10ng.qrcode"
@@ -51,7 +51,7 @@ android {
 
 dependencies {
     // Android
-    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.core:core-ktx:1.12.0")
 
     // 单元测试（可选）
     testImplementation("junit:junit:4.13.2")
@@ -59,18 +59,18 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:1.3.7")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:2.0.15")
 
     // 权限申请
     implementation("com.google.accompanist:accompanist-permissions:$accompanist_ver")
 
     // CameraX
-    api("androidx.camera:camera-camera2:1.2.3")
-    api("androidx.camera:camera-lifecycle:1.2.3")
-    api("androidx.camera:camera-view:1.3.0-rc01")
+    api("androidx.camera:camera-camera2:1.3.1")
+    api("androidx.camera:camera-lifecycle:1.3.1")
+    api("androidx.camera:camera-view:1.3.1")
 
     // Zxing
-    api("com.google.zxing:core:3.5.2")
+    api("com.google.zxing:core:3.5.3")
 }
 
 val bds100MavenUsername: String by project
