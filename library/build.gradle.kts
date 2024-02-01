@@ -11,10 +11,10 @@ version = "0.1.0"
 
 android {
     namespace = "com.d10ng.qrcode"
-    compileSdk = Project.compile_sdk
+    compileSdk = android_compile_sdk
 
     defaultConfig {
-        minSdk = Project.min_sdk
+        minSdk = android_min_sdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -51,7 +51,7 @@ android {
 
 dependencies {
     // Android
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:$androidx_core_ver")
 
     // 单元测试（可选）
     testImplementation("junit:junit:4.13.2")
@@ -59,10 +59,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:2.0.15")
-
-    // 权限申请
-    implementation("com.google.accompanist:accompanist-permissions:$accompanist_ver")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:$dl_compose_ver")
+    // 通用APP工具
+    implementation("com.github.D10NGYANG:DLAppUtil:$dl_app_ver")
 
     // CameraX
     api("androidx.camera:camera-camera2:1.3.1")

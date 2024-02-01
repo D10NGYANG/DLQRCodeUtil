@@ -1,4 +1,4 @@
-package com.d10ng.qrcode
+package com.d10ng.qrcode.demo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.d10ng.compose.ui.base.Button
+import com.d10ng.qrcode.QRCodeScanManager
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {

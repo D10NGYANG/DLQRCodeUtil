@@ -1,4 +1,5 @@
 plugins {
+    2
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
@@ -6,13 +7,13 @@ plugins {
 }
 
 android {
-    namespace = "com.d10ng.qrcode"
-    compileSdk = Project.compile_sdk
+    namespace = "com.d10ng.qrcode.demo"
+    compileSdk = android_compile_sdk
 
     defaultConfig {
         applicationId = "com.d10ng.qrcode.demo"
-        minSdk = Project.min_sdk
-        targetSdk = Project.target_sdk
+        minSdk = android_min_sdk
+        targetSdk = android_target_sdk
         versionCode = 1
         versionName = "0.0.1"
 
@@ -49,7 +50,7 @@ android {
 dependencies {
 
     // Android
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:$androidx_core_ver")
 
     // 单元测试（可选）
     testImplementation("junit:junit:4.13.2")
@@ -57,7 +58,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // jetpack compose 框架
-    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:2.0.15")
+    implementation("com.github.D10NGYANG:DLJetpackComposeUtil:$dl_compose_ver")
+    // 通用APP工具
+    implementation("com.github.D10NGYANG:DLAppUtil:$dl_app_ver")
 
     implementation(project(":library"))
     // 内存泄漏检查

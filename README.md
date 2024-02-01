@@ -23,11 +23,11 @@ allprojects {
 ```gradle
 dependencies {
     // jetpack compose 框架
-    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:1.3.7'
-    // 权限申请
-    implementation "com.google.accompanist:accompanist-permissions:0.32.0"
+    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:2.0.15'
+    // 通用APP工具（含权限管理
+    implementation 'com.github.D10NGYANG:DLAppUtil:2.5.0'
     // 二维码扫描
-    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.0.9'
+    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.1.0'
 }
 ```
 3 混淆
@@ -38,10 +38,17 @@ dependencies {
 ## 使用
 
 在需要的地方调用：
+
 ```kotlin
-// 启动扫描
-QRCodeScanManager.instant.startScanActivity(activity) { scanResult ->
-    // scanResult 为扫描结果字符串
+scope.launch {
+    // 扫描二维码
+    val result = QRCodeScanManager.instant.scanQRCode(activity)
+    // result 为扫描结果字符串，如果为empty则为扫描失败或者取消扫描
+    if (result.isEmpty()) {
+        Toast.makeText(activity, "扫描失败或取消", Toast.LENGTH_SHORT).show()
+    } else {
+        Toast.makeText(activity, "扫描结果：$result", Toast.LENGTH_SHORT).show()
+    }
 }
 ```
 

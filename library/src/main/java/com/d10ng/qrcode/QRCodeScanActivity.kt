@@ -1,8 +1,6 @@
 package com.d10ng.qrcode
 
 import android.Manifest
-import android.app.Activity
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
@@ -30,6 +28,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,12 +38,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.core.view.WindowCompat
+import com.d10ng.app.managers.PermissionManager
+import com.d10ng.app.view.lockScreenOrientation
+import com.d10ng.app.view.setStatusBar
 import com.d10ng.compose.ui.AppShape
 import com.d10ng.compose.ui.AppText
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 class QRCodeScanActivity : ComponentActivity() {
@@ -79,16 +80,17 @@ class QRCodeScanActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun QRCodeScanView(
     onClickBack: () -> Unit,
 ) {
-    val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
+    var hasPermission by remember {
+        mutableStateOf(false)
+    }
 
     LaunchedEffect(Unit) {
-        if (!cameraPermissionState.status.isGranted) {
-            cameraPermissionState.launchPermissionRequest()
+        launch {
+            hasPermission = PermissionManager.request(Manifest.permission.CAMERA)
         }
     }
 
@@ -108,7 +110,7 @@ fun QRCodeScanView(
             .fillMaxSize()
             .background(Color.DarkGray)
     ) {
-        if (cameraPermissionState.status.isGranted) {
+        if (hasPermission) {
             CameraPreviewView(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -153,49 +155,4 @@ fun QRCodeScanView(
             )
         }
     }
-}
-
-/**
- * 锁定屏幕方向
- * - 除了在Activity中设置当前方法以外还需要，在主题中设置以下内容
- * <resources>
- *     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
- *         <!-- 锁定布局在发生以下改变时，不重置状态 -->
- *         <item name="android:configChanges">orientation|keyboardHidden|screenSize|locale</item>
- *     </style>
- * </resources>
- * - 还需要在AndroidManifest.xml中为您的activity设置以下内容
- * <activity
- *     android:name=".XActivity"
- *     android:screenOrientation="locked" />
- * @receiver Activity
- * @param isVertical Boolean 是否为竖向
- */
-private fun Activity.lockScreenOrientation(isVertical: Boolean = true) {
-    val orientation =
-        if (isVertical) ActivityInfo.SCREEN_ORIENTATION_PORTRAIT else ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    if (requestedOrientation != orientation) {
-        requestedOrientation = orientation
-    }
-}
-
-/**
- * 状态栏设置
- * @receiver Activity
- * @param fullScreen Boolean 是否全屏，沉浸式状态栏
- * @param color Int 状态栏颜色
- * @param darkText Boolean 状态栏字体颜色是否为黑色
- */
-private fun Activity.setStatusBar(
-    fullScreen: Boolean = true,
-    color: Int = 0,
-    darkText: Boolean = true
-) {
-    // 沉浸式状态栏
-    WindowCompat.setDecorFitsSystemWindows(window, !fullScreen)
-    // 设置状态栏颜色
-    window.statusBarColor = color
-    // 设置状态栏字体颜色
-    WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars =
-        darkText
 }
