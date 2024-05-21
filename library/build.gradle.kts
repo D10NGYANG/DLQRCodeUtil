@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.D10NGYANG"
-version = "0.1.0"
+version = "0.1.1"
 
 android {
     namespace = "com.d10ng.qrcode"
@@ -64,9 +64,9 @@ dependencies {
     implementation("com.github.D10NGYANG:DLAppUtil:$dl_app_ver")
 
     // CameraX
-    api("androidx.camera:camera-camera2:1.3.1")
-    api("androidx.camera:camera-lifecycle:1.3.1")
-    api("androidx.camera:camera-view:1.3.1")
+    api("androidx.camera:camera-camera2:$androidx_camera_ver")
+    api("androidx.camera:camera-lifecycle:$androidx_camera_ver")
+    api("androidx.camera:camera-view:$androidx_camera_ver")
 
     // Zxing
     api("com.google.zxing:core:3.5.3")

@@ -1,8 +1,6 @@
 # DLQRCodeUtil
 jetpack compose android QRCode scan
 
-[![](https://jitpack.io/v/D10NGYANG/DLQRCodeUtil.svg)](https://jitpack.io/#D10NGYANG/DLQRCodeUtil)
-
 ## 功能
 - [x] 单次扫描二维码并返回结果
 - [ ] 识别多个二维码
@@ -23,11 +21,11 @@ allprojects {
 ```gradle
 dependencies {
     // jetpack compose 框架
-    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:2.0.15'
+    implementation 'com.github.D10NGYANG:DLJetpackComposeUtil:2.0.24'
     // 通用APP工具（含权限管理
-    implementation 'com.github.D10NGYANG:DLAppUtil:2.5.0'
+    implementation 'com.github.D10NGYANG:DLAppUtil:2.5.4'
     // 二维码扫描
-    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.1.0'
+    implementation 'com.github.D10NGYANG:DLQRCodeUtil:0.1.1'
 }
 ```
 3 混淆
