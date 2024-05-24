@@ -3,11 +3,12 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("maven-publish")
 }
 
 group = "com.github.D10NGYANG"
-version = "0.1.1"
+version = "0.1.2"
 
 android {
     namespace = "com.d10ng.qrcode"
@@ -35,12 +36,6 @@ android {
     }
     kotlin {
         jvmToolchain(8)
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = compose_compiler_ver
-    }
-    buildFeatures {
-        compose = true
     }
     publishing {
         singleVariant("release") {

@@ -7,13 +7,8 @@ const val androidx_core_ver = "1.13.1"
 const val androidx_camera_ver = "1.3.3"
 
 // kotlin
-const val kotlin_ver = "1.9.24"
-// kotlin ex
-const val kotlin_coroutines_ver = "1.8.1"
-
-// compose
-const val compose_compiler_ver = "1.5.14"
+const val kotlin_ver = "2.0.0"
 
 // d10ng
-const val dl_compose_ver = "2.0.24"
+const val dl_compose_ver = "2.0.25"
 const val dl_app_ver = "2.5.4"

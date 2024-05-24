@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -37,12 +38,6 @@ android {
     }
     kotlin {
         jvmToolchain(8)
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = compose_compiler_ver
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
